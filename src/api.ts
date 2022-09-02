@@ -39,24 +39,3 @@ export const api = {
     return ignores.data;
   },
 };
-
-type Project = {
-  id: string;
-  name: string;
-};
-
-export type IgnoredIssues = {
-  [issueId: string]: Array<{
-    [path: string]: {
-      reason: string;
-      created: string;
-      ignoredBy: {
-        id: string;
-        name: string;
-        email: string;
-      };
-      reasonType: "not-vulnerable" | "wont-fix" | "temporary-ignore";
-      disregardIfFixable: boolean;
-    };
-  }>;
-};
