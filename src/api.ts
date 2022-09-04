@@ -1,5 +1,7 @@
 import axios from "axios";
 import dotenv from "dotenv";
+import R from "ramda";
+import { Ignore, IgnoredIssues, Project } from "./types";
 
 dotenv.config();
 const { SNYK_TOKEN } = process.env;
@@ -37,5 +39,32 @@ export const api = {
       { headers }
     );
     return ignores.data;
+  },
+
+  /** create a new ignore */
+  createIgnore: async (
+    orgId: string,
+    projectId: string,
+    ignore: Ignore
+  ): Promise<void> => {
+    const result = await axios.post(
+      `${apiBase}/org/${orgId}/project/${projectId}/ignore/${ignore.issueId}`,
+      { ...R.omit(["issueId"], ignore), disregardIfFixable: false },
+      { headers }
+    );
+    // console.log(result);
+  },
+
+  /** create a new ignore */
+  deleteIgnore: async (
+    orgId: string,
+    projectId: string,
+    issueId: string
+  ): Promise<void> => {
+    const result = await axios.delete(
+      `${apiBase}/org/${orgId}/project/${projectId}/ignore/${issueId}`,
+      { headers }
+    );
+    // console.log(result);
   },
 };
