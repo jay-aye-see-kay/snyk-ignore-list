@@ -13,6 +13,6 @@ Get a `SNYK_TOKEN` from [your snyk account page](https://app.snyk.io/account/) a
 # install
 yarn
 
-# run the main script (will calc diffs and print, will not make any real changes yet)
-yarn ts-node ./src/main.ts
+# run the main script (will calc diffs and make any real changes)
+yarn snykSync
 ```
